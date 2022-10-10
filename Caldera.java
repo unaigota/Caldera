@@ -5,13 +5,13 @@
  * informando cuanto se tiene que devolver o
  * cuanto mas tiene que pagar cada vecino.
  * 
- * @author Aitor Etxabarren
+ * @author Unai Gota
  * @version 1.0
  */
 public class Caldera {
     
     // TODO: CONSTANTES
-
+    
     /** El IVA se aplica a todos los gasto. */
     
     /** El impuesto de hidrocarburos solo se aplica al gas, ademas del iva. */
@@ -19,23 +19,51 @@ public class Caldera {
 
     // Conceptos gastos
     
+    private final double IMP_IVA = 0.22;
+    private final double IMP_HIDROCARBUROS = 0.20;
+    private final char AGUA = 'A';
+    private final char LUZ = 'L';
+    private final char NADA = 'N';
 
     // Ningun mes
     
+    private final int NINGUNO = 0;
 
     // Periodos
     
+    private final int PRIODO_OCTUBRE_DICIENMBRE = 1;
+    private final int PRIODO_ENERO_MARZO = 2;
+    private final int PRIODO_ABRIL_JUNIO = 3;
+    private final int PRIODO_JULIO_SEPTIEMBRE = 4;
 
     
     // TODO: VARIABLES DE CLASE (PROPIEDADES/ATRIBUTOS)
-
+    
     // vecinos y presupuesto
     
+    private int vecinos;
+    private int presupuesto;
 
     // acumulados
-
+    
+    private int acumuladoConsumo;
+    private int acumuladoMantenimiento;
+    
     // estadisticas
 
+    private int gastoAgua;
+    private int gastoLuz;
+    private int mesMasConsumo;
+    private int maxConsumo;
+    private int mesMasCaro;
+    private int maxPrecio;
+    private int mesMasBarato;
+    private int minPrecio;
+    private int periodoMasMantenimiento;
+    private int maxMantenimiento;
+    private int mesMasGasto;
+    private int maxGasto;
+    private int conceptoMasGasto;
     
     
     
@@ -45,6 +73,22 @@ public class Caldera {
      * Constructor de la clase Caldera. Inicializa los atributos.
      */
     
+    public Caldera ()
+    {
+        gastoAgua = AGUA;
+        gastoLuz = LUZ;
+        mesMasConsumo
+        maxConsumo;
+        mesMasCaro;
+        maxPrecio;
+        mesMasBarato;
+        minPrecio;
+        periodoMasMantenimiento;
+        maxMantenimiento;
+        mesMasGasto;
+        maxGasto;
+        conceptoMasGasto = NADA;
+    }
 
     /**
      * Constructor de la clase Caldera. Inicializa los atributos.
