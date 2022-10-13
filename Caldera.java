@@ -10,17 +10,18 @@
  */
 public class Caldera {
     
-    // TODO: CONSTANTES
+    // CONSTANTES
     
     /** El IVA se aplica a todos los gasto. */
     
+    private final double IMP_IVA = 0.22;
+
     /** El impuesto de hidrocarburos solo se aplica al gas, ademas del iva. */
     
+    private final double IMP_HIDROCARBUROS = 0.20;
 
     // Conceptos gastos
     
-    private final double IMP_IVA = 0.22;
-    private final double IMP_HIDROCARBUROS = 0.20;
     private final char AGUA = 'A';
     private final char LUZ = 'L';
     private final char NADA = 'N';
@@ -67,7 +68,7 @@ public class Caldera {
     
     
     
-    // TODO: constructores
+    // constructores
     
     /**
      * Constructor de la clase Caldera. Inicializa los atributos.
@@ -75,18 +76,18 @@ public class Caldera {
     
     public Caldera ()
     {
-        gastoAgua = AGUA;
-        gastoLuz = LUZ;
-        mesMasConsumo
-        maxConsumo;
-        mesMasCaro;
-        maxPrecio;
-        mesMasBarato;
-        minPrecio;
-        periodoMasMantenimiento;
-        maxMantenimiento;
-        mesMasGasto;
-        maxGasto;
+        gastoAgua = 0;
+        gastoLuz = 0;
+        mesMasConsumo = NINGUNO;
+        maxConsumo = 0;
+        mesMasCaro = NINGUNO;
+        maxPrecio = 0;
+        mesMasBarato = NINGUNO;
+        minPrecio = 0;
+        periodoMasMantenimiento = NINGUNO;
+        maxMantenimiento = 0;
+        mesMasGasto = NINGUNO;
+        maxGasto = 0;
         conceptoMasGasto = NADA;
     }
 
@@ -98,9 +99,14 @@ public class Caldera {
      *                       gastos
      */
     
-
+    public Caldera (int queVecinos, int quePresupuesto)
+    {
+       vecinos = queVecinos;
+       presupuesto = quePresupuesto;
+    }
     
-    // TODO: getters y setters
+    
+    // getters y setters
     
     /**
      * Fija el valor del presupuesto
@@ -108,6 +114,10 @@ public class Caldera {
      * @param quePresupuesto Valor del presupuesto, ej. 38638
      */
     
+    public void setPresupuesto(int quePresupuesto)
+    {
+        presupuesto = quePresupuesto;
+    }
 
     /**
      * Obtiene el valor del presupuesto
@@ -115,6 +125,10 @@ public class Caldera {
      * @return valor del presupuesto, ej. 38638
      */
     
+    public int getPresupuesto()
+    {
+        return presupuesto;
+    }
 
     /**
      * Fija el numero de vecinos de la comunidad
@@ -122,6 +136,10 @@ public class Caldera {
      * @param queVecinos numero de vecinos, ej. 48
      */
     
+    public void setVecinos(int queVecinos)
+    {
+        vecinos = queVecinos;
+    }
 
     /**
      * Obtiene el numero de vecinos
@@ -129,6 +147,10 @@ public class Caldera {
      * @return numero de vecinos, ej. 48
      */
     
+    public int getVecinos()
+    {
+        return vecinos;
+    }
 
     /**
      * Cantidad de gas consumido cada mes al precio de mercado
@@ -138,7 +160,30 @@ public class Caldera {
      * @param precio Precio en Euros al que se ha conseguido el gas, ej. 0.067668
      */
     public void consumo(int mes, int gas, double precio) {
-        // TODO: consumo
+        // consumo
+        acumuladoConsumo += gas * precio;
+        if (gas * precio > maxConsumo)
+        {
+            maxConsumo = acumuladoConsumo;
+            mesMasConsumo = mes;
+        }
+        if (precio > maxPrecio)
+        {
+            mesMasCaro = mes;
+            maxPrecio = acumuladoConsumo;
+        }
+        if (mesMasBarato == NINGUNO)
+        {
+            mesMasBarato = mes;
+        }
+        if (minPrecio == 0)
+        {
+            minPrecio = acumuladoConsumo;
+        }else if (precio < minPrecio)
+        {
+            minPrecio = acumuladoConsumo;
+            mesMasBarato = mes;
+        }
     }
 
     /**
@@ -149,6 +194,15 @@ public class Caldera {
      */
     public void mantenimiento(int periodo, double importe) {
         // TODO: mantenimiento
+        acumuladoMantenimiento += importe;
+        if (maxMantenimiento == NADA)
+        {
+            maxMantenimiento = acumuladoMantenimiento;
+        }else if(maxMantenimiento < importe)
+        {
+            maxMantenimiento = acumuladoMantenimiento;
+        }
+        
     }
 
     /**
